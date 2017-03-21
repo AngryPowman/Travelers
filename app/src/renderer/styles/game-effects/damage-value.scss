@@ -1,0 +1,46 @@
+.damage-value {
+    position: absolute;
+    color: white;
+    left: 20%;
+    top: -10%;
+    &.damage,
+    &.cure {
+        // display: inline-block;
+        // -webkit-box-sizing: content-box;
+        // -moz-box-sizing: content-box;
+        // box-sizing: content-box;
+        // padding: 0px;
+        // overflow: hidden;
+        // border: none;
+        font: normal 30px/1 "VT323", Helvetica, sans-serif;
+        // text-align: center;
+        // -o-text-overflow: ellipsis;
+        // text-overflow: ellipsis;
+    }
+    &.damage {
+        color: orangered;
+        text-shadow: 1px 1px 0 yellow;
+    }
+    &.cure {
+        color: limegreen;
+        text-shadow: 1px 1px 0 yellowgreen;
+    }
+    .float-value {
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(-10%);
+                transform: scale(0.1);
+            }
+            30% {
+                transform: translateY(-80%);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120%);;
+                opacity: 0;
+            }
+        }
+        animation: float 1.2s ease infinite;
+    }
+}

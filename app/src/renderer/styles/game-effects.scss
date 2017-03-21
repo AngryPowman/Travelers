@@ -1,0 +1,7 @@
+@import "game-effects/effects.scss";
+@import "game-effects/damage-value.scss";
+
+@include effect(effect-dragon-spell, "../assets/images/effects/dragon.png", 960px, 768px, 5, 4, 0.5);
+@include effect(effect-fire-explode, "../assets/images/effects/fire-explode.png", 960px, 577px, 5, 3, 0.5);
+@include effect(effect-dragon-twine, "../assets/images/effects/dragon-twine.png", 2542px, 596px, 8, 2, 1);
+@include effect(effect-wind-attack, "../assets/images/effects/wind-attack.png", 1150px, 382px, 6, 2, 1);

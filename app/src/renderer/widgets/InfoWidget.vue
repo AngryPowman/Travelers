@@ -15,8 +15,8 @@
 <style lang="scss" scoped>
   @import '../styles/global';
   .info-container {
-    width: 55%;
+    width: 100%;
     height: $PANEL_HEIGHT;
-    background: red;
+    background: #e9e9f9;
   }
 </style>

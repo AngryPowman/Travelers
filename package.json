@@ -61,6 +61,8 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
-    "electron": "^1.6.2"
+    "electron": "^1.6.2",
+    "globby": "^6.1.0",
+    "node-sass": "^4.5.0"
   }
 }

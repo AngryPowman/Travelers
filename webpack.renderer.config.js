@@ -19,61 +19,55 @@ let rendererConfig = {
   externals: Object.keys(pkg.dependencies || {}),
   module: {
     rules: [{
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      }, {
-        test: /\.html$/,
-        use: 'vue-html-loader'
-      }, {
-        test: /\.js$/,
-        use: 'babel-loader',
-        include: [path.resolve(__dirname, 'app/src/renderer')],
-        exclude: /node_modules/
-      }, {
-        test: /\.json$/,
-        use: 'json-loader'
-      }, {
-        test: /\.node$/,
-        use: 'node-loader'
-      }, {
-        test: /\.vue$/,
-        use: {
-          loader: 'vue-loader',
-          options: {
-            loaders: {
-              sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
-              scss: 'vue-style-loader!css-loader!sass-loader'
-            }
-          }
-        }
-      }, {
-        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            name: 'imgs/[name].[ext]'
-          }
-        }
-      }, {
-        test: /([a-z0-9]+)\/([a-z0-9]+\.png)$/,
-        loader: "url-loader?name=$1/$2"
-      },
-
-      {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        use: {
-          loader: 'url-loader',
-          query: {
-            limit: 10000,
-            name: 'fonts/[name].[ext]'
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: 'css-loader'
+      })
+    }, {
+      test: /\.html$/,
+      use: 'vue-html-loader'
+    }, {
+      test: /\.js$/,
+      use: 'babel-loader',
+      include: [path.resolve(__dirname, 'app/src/renderer')],
+      exclude: /node_modules/
+    }, {
+      test: /\.json$/,
+      use: 'json-loader'
+    }, {
+      test: /\.node$/,
+      use: 'node-loader'
+    }, {
+      test: /\.vue$/,
+      use: {
+        loader: 'vue-loader',
+        options: {
+          loaders: {
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax=1',
+            scss: 'vue-style-loader!css-loader!sass-loader'
           }
         }
       }
-    ]
+    }, {
+      test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+      use: {
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'imgs/[name].[ext]'
+        }
+      }
+    }, {
+      test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+      use: {
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'fonts/[name].[ext]'
+        }
+      }
+    }]
   },
   plugins: [
     new ExtractTextPlugin('styles.css'),
@@ -94,6 +88,7 @@ let rendererConfig = {
       'components': path.join(__dirname, 'app/src/renderer/components'),
       'views': path.join(__dirname, 'app/src/renderer/views'),
       'widgets': path.join(__dirname, 'app/src/renderer/widgets'),
+      'assets': path.join(__dirname, 'app/src/renderer/assets'),
       'renderer': path.join(__dirname, 'app/src/renderer')
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],
@@ -139,7 +134,7 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false
+        warnings: true
       }
     })
   )
