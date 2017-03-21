@@ -1,12 +1,13 @@
 <template>
   <div class="battle-character-container">
-    <div :class="{'damage-value': true, 'damage': damageValue < 0, 'cure': damageValue >= 0}">
-      <div class="float-value">{{Math.abs(damageValue)}}</div>
+    <div v-show="damageValue != 0" :class="{'damage-value': true, 'damage': damageValue < 0, 'cure': damageValue >= 0}">
+      <div ref="damageValueEffect" :class="{'float-value': damageValue != 0}">{{damageValueStr}}</div>
     </div>
 
     <div :class="actionEffect">
       <div :class="hueEffect"></div>
       <effect-component ref="skillEffect" class="skill-effect"></effect-component>
+      <effect-component ref="onHitEffect" class="skill-effect"></effect-component>
       <div class="battle-character">
         <img class="avatar" :src="this.$props.character.avatar"></img>
         <div class="info-container">
@@ -21,8 +22,6 @@
 
 <style lang="scss" scoped>
   @import "../styles/game-effects";
-  @import url("http://fonts.googleapis.com/css?family=VT323");
-  @import url("http://fonts.googleapis.com/css?family=Passero%20One");
   .battle-character-container {
     display: inline-block;
     position: relative;
@@ -84,7 +83,8 @@
       return {
         hueEffect: "",
         actionEffect: "",
-        damageValue: -2234,
+        damageValue: 0,
+        damageValueStr: ''
       }
     },
     methods: {
@@ -119,23 +119,54 @@
           this.$data.hueEffect = hueClass;
         }, 0);
       },
-      playSkill: function(skill, targets) {
+      clearAllEffects: function() {
+        this.setHueEffect("");
+        this.setActionEffect("");
+      },
+      playSkill: function(skill, targets, onSpellIteration, onHitIteration) {
         this.setHueEffect("action-effect spell-blink");
         this.setActionEffect(skill["effect"]["spell_action"]);
         this.$refs.skillEffect.play(skill["effect"]["spell_animation"], () => {
-          this.setHueEffect("");
-          this.setActionEffect("");
+          this.clearAllEffects();
+
+          if (onSpellIteration) {
+            onSpellIteration(this, this.$props.character, skill);
+          }
+
           if (targets.length > 0) {
-            targets.forEach(function(target) {
-              target.onHit(this.$props.character, skill);
+            targets.forEach((target) => {
+              target.onHit(this.$props.character, skill, onHitIteration);
             }, this);
           }
         });
 
       },
-      onHit: function(casterData, skillData) {
-        console.log("【%s】On Hit from %o by %o", this.$props.character.name, casterData, skillData);
-        this.$refs.skillEffect.play(skillData["effect"]["onhit_animation"], null);
+      showDamageValue: function(value) {
+        this.$refs.damageValueEffect.addEventListener("animationend", (animation) => {
+          this.$data.damageValue = 0;
+          this.$data.damageValueStr = '';
+        }, true);
+
+        this.$data.damageValue = value;
+
+        if (value === -1) { // Lucky egg
+          this.$data.damageValueStr = '-1s';
+        } else if (value === 1) {
+          this.$data.damageValueStr = '+1s';
+        } else {
+          this.$data.damageValueStr = Math.abs(value).toString();
+        }
+
+      },
+      onHit: function(casterData, skillData, onHitIteration) {
+
+        this.$refs.onHitEffect.play(skillData["effect"]["onhit_animation"], () => {
+          console.log("【%s】On Hit from %o by %o", this.$props.character.name, casterData, skillData);
+
+          if (onHitIteration) {
+            onHitIteration(this, casterData, this.$props.character);
+          }
+        });
 
         this.setHueEffect("action-effect onhit-blink");
         this.setActionEffect(skillData["effect"]["onhit_action"]);

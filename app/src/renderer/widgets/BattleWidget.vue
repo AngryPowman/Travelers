@@ -3,6 +3,7 @@
     <div class="enemies">
       <team-widget ref="enemiesWidget" :team="enemies"></team-widget>
     </div>
+    <textarea class="battle-log-board" />
     <div class="team">
       <team-widget ref="teamWidget" :team="team"></team-widget>
     </div>
@@ -22,10 +23,42 @@
     methods: {
       testBattle: function() {
         var casterData = this.findCharacterID("angrypowman");
-        casterData.hp = 100;
-        this.castSkill(casterData.skills[0], "angrypowman", ["elder", "zapline", "xianggangjizhe"]);
+        var onHitCount = 0; //用于记录是否每个目标都被攻击了
+
+        // 技能施法吟唱回调
+        var onSpellIteration = (component, character, skill) => {
+          if (character.id === 'elder') {
+            component.showDamageValue(1);
+          }
+        };
+
+        // 角色受到技能打击回调
+        var onHitIteration = (component, caster, character) => {
+          character.hp -= 120;
+
+          if (caster.id === 'elder') {
+            component.showDamageValue(-1);
+          } else {
+            component.showDamageValue(-233);
+          }
+
+          onHitCount++;
+          if (onHitCount === targets.length) {
+            console.log("All targets onhit finished.");
+            onHitCount = 0;
+
+            setTimeout(() => {
+              targets = ["kingwl"];
+              this.castSkill(casterData.skills[0], "elder", ["kingwl"], 0, onSpellIteration, onHitIteration);
+            }, 300);
+          }
+
+        };
+
+        var targets = ["dongxiansheng", "wallace", "zapline", "xianggangjizhe"];
+        this.castSkill(casterData.skills[0], "angrypowman", targets, 0, onSpellIteration, onHitIteration);
       },
-      castSkill: function(skill, casterID, targetIDs, targetType) {
+      castSkill: function(skill, casterID, targetIDs, targetType, onSpellIteration, onHitIteration) {
         if (!targetType) {
           targetType = GameDef.BattleTargetType.ToEnemy;
         }
@@ -41,7 +74,7 @@
           }
         }
 
-        casterComponent.playSkill(skill, targetComponentList);
+        casterComponent.playSkill(skill, targetComponentList, onSpellIteration, onHitIteration);
       },
       getCharacterComponent: function(id) {
         var teamWidget = this.$refs.teamWidget;
@@ -58,7 +91,7 @@
       findCharacterID: function(id) {
         var result = null;
         var compareFunc = (element) => {
-          if (element.id == id) {
+          if (element.id === id) {
             result = element;
           }
         };
@@ -72,12 +105,12 @@
       }
     },
     data() {
-      var powmanImg = require('assets/angrypowman.png');
+      // var powmanImg = require('assets/angrypowman.png');
       return {
         team: [{
           id: "angrypowman",
           name: '愤怒的泡面',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/angrypowman.png'),
           maxHp: 1000,
           hp: 1000,
           skills: [{
@@ -93,56 +126,56 @@
         }, {
           id: "kingwl",
           name: '王文璐',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/kingwl.png'),
           maxHp: 1000,
           hp: 600
         }, {
           id: "vizee",
           name: '村长',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/vizee.png'),
           maxHp: 1000,
           hp: 900
         }, {
           id: "doula",
           name: '柯小翔',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/doula.png'),
           maxHp: 1000,
           hp: 100
         }, {
           id: "bigemon",
           name: '爆破鬼才胡大头',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/bigemon.png'),
           maxHp: 1000,
           hp: 400
         }],
         enemies: [{
           id: "elder",
           name: '长者',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/elder.png'),
           maxHp: 1000,
           hp: 700
         }, {
           id: "wallace",
           name: '华莱士',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/wallace.png'),
           maxHp: 1000,
           hp: 600
         }, {
           id: "dongxiansheng",
           name: '特首董先生',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/dongxiansheng.png'),
           maxHp: 1000,
           hp: 900
         }, {
           id: "xianggangjizhe",
           name: '香港记者',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/xianggangjizhe.png'),
           maxHp: 1000,
           hp: 100
         }, {
           id: "zapline",
           name: '老肉鸡',
-          avatar: powmanImg,
+          avatar: require('assets/images/avatars/zapline.png'),
           maxHp: 1000,
           hp: 400
         }]

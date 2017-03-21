@@ -1,21 +1,15 @@
+@import url("http://fonts.googleapis.com/css?family=VT323");
+@import url("http://fonts.googleapis.com/css?family=Passero%20One");
+  
 .damage-value {
     position: absolute;
     color: white;
-    left: 20%;
     top: -10%;
     &.damage,
     &.cure {
-        // display: inline-block;
-        // -webkit-box-sizing: content-box;
-        // -moz-box-sizing: content-box;
-        // box-sizing: content-box;
-        // padding: 0px;
-        // overflow: hidden;
-        // border: none;
         font: normal 30px/1 "VT323", Helvetica, sans-serif;
-        // text-align: center;
-        // -o-text-overflow: ellipsis;
-        // text-overflow: ellipsis;
+        width: 72px;
+        text-align: center;
     }
     &.damage {
         color: orangered;
@@ -41,6 +35,6 @@
                 opacity: 0;
             }
         }
-        animation: float 1.2s ease infinite;
+        animation: float 1.2s ease 1;
     }
 }

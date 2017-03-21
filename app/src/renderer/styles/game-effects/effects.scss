@@ -54,6 +54,7 @@
         transform: scale($zoom_factor);
         width: $frame_width;
         height: $frame_height;
+        animation-iteration-count: 1;
         background-image: url($file);
         animation: #{$name + '_play_x'} #{$play_rate}s steps($frame_x_count) 1,
         #{$name + '_play_y'} #{$play_rate}s steps($frame_y_count) 1;
