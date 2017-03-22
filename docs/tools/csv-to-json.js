@@ -3,7 +3,7 @@ var config = {
   field_header_index: 0, // Which row is the field name source
   parsing_number: true, // Parse number
   parsing_array: true, // Parse array
-  cvs_path: './docs/cvs',
+  csv_path: './docs/csv',
   output_path: './app/src/renderer/assets/config'
 };
 
@@ -55,13 +55,13 @@ function csvToJSON(csv) {
 }
 
 const fs = require('fs');
-fs.readdir(config.cvs_path, (err, files) => {
+fs.readdir(config.csv_path, (err, files) => {
   files.forEach(file => {
 
 
     // Read CVS
-    var cvs = fs.readFileSync(config.cvs_path + '/' + file, 'utf8');
-    var json = csvToJSON(cvs);
+    var csv = fs.readFileSync(config.csv_path + '/' + file, 'utf8');
+    var json = csvToJSON(csv);
 
     // Get configuration name
     var matches = /.*\((.*)\)/.exec(file);
