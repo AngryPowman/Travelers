@@ -1,9 +1,92 @@
 [
   {
-    "物品名称": "「代码大全」",
-    "品质": 3,
-    "价格": 5000,
-    "可使用": "FALSE",
-    "说明": "一本程序员才看得懂的书，但通常是用来砸人的，能造成成吨伤害。"
+    "id": 3000,
+    "name": "狼人杀的Cosplay道具",
+    "description": "狼人杀玩家的cosplay道具",
+    "price": 100,
+    "type": 2,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "11.png"
+  },
+  {
+    "id": 3001,
+    "name": "小黄书",
+    "description": "书中自有不可描述。👀",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "3000.png"
+  },
+  {
+    "id": 3002,
+    "name": "没有火药的木桶",
+    "description": "看起来没什么用，装了火药之后威力无穷",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "65.png"
+  },
+  {
+    "id": 3003,
+    "name": "翡翠项链",
+    "description": "上面的翡翠是假的",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "12.png"
+  },
+  {
+    "id": 3004,
+    "name": "神父的皇冠",
+    "description": "估计也是假的",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "20.png"
+  },
+  {
+    "id": 3005,
+    "name": "不普通的帽子",
+    "description": "也并没有那么特殊啦",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "32.png"
+  },
+  {
+    "id": 3006,
+    "name": "绿色的东西不知道是什么",
+    "description": "RT",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "24.png"
+  },
+  {
+    "id": 3007,
+    "name": "黄帽子",
+    "description": "要是绿色的话就完美了",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "21.png"
+  },
+  {
+    "id": 3008,
+    "name": "莱因哈特的盔甲",
+    "description": "厉害的盔甲",
+    "price": 100,
+    "type": 3,
+    "custom_tips": "",
+    "allow_use": true,
+    "icon": "16.png"
   }
 ]
