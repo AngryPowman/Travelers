@@ -89,6 +89,7 @@ let rendererConfig = {
       'views': path.join(__dirname, 'app/src/renderer/views'),
       'widgets': path.join(__dirname, 'app/src/renderer/widgets'),
       'assets': path.join(__dirname, 'app/src/renderer/assets'),
+      'scripts': path.join(__dirname, 'app/src/renderer/scripts'),
       'renderer': path.join(__dirname, 'app/src/renderer')
     },
     extensions: ['.js', '.vue', '.json', '.css', '.node'],

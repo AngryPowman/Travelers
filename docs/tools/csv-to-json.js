@@ -2,6 +2,7 @@ var config = {
   header_count: 1, // header count
   field_header_index: 0, // Which row is the field name source
   parsing_number: true, // Parse number
+  parsing_boolean: true, // Parse boolean
   parsing_array: true, // Parse array
   csv_path: './docs/csv',
   output_path: './app/src/renderer/assets/config'
@@ -37,6 +38,11 @@ function csvToJSON(csv) {
         value = Number(currentline[j]);
       }
 
+      // Parse boolean
+      if (config.parsing_boolean && (currentline[j].toLowerCase() === 'true' || currentline[j].toLowerCase() === 'false')) {
+        value = Boolean(currentline[j]);
+      }
+
       // Parse array
       if (config.parsing_array && /\[([\d+];?)+\d\]/.test(currentline[j])) {
         var strArray = currentline[j].replace('[', '').replace(']', '');
@@ -58,8 +64,7 @@ const fs = require('fs');
 fs.readdir(config.csv_path, (err, files) => {
   files.forEach(file => {
 
-
-    // Read CVS
+    // Read CSV
     var csv = fs.readFileSync(config.csv_path + '/' + file, 'utf8');
     var json = csvToJSON(csv);
 

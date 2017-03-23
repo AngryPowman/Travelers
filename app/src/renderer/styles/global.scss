@@ -1,14 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300);
+@import './ui.scss';
 
 /* Global Variable */
+
 $MAX_WINDOW_HEIGHT: 768px;
 $TOOLBAR_HEIGHT: 48px;
 $PANEL_HEIGHT: $MAX_WINDOW_HEIGHT - $TOOLBAR_HEIGHT;
-
-* {
-    margin: 0;
-    padding: 0;
-}
 
 html,
 body {
@@ -18,12 +14,24 @@ body {
 body {
     margin: 0;
     align-items: center;
-    background: radial-gradient( ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, .85) 100%);
+    // background: radial-gradient( ellipse at center, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, .85) 100%);
     background-position: center;
     display: flex;
     font-family: Lato, Helvetica, sans-serif;
     justify-content: center;
     text-align: center;
+}
+
+div, button, a, li, img {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    cursor: default;
+    &.allow-select {
+        user-select: text;
+        -moz-user-select: text;
+        // cursor: text;
+    }
 }
 
 #app {

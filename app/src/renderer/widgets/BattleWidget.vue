@@ -11,8 +11,27 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+  .battle-view-container {
+    width: 100%;
+    height: 100%;
+    background: #1a1a1a;
+    .team,
+    .enemies {
+      position: relative;
+    }
+    .team {
+      top: 50%;
+    }
+    .enemies {
+      top: 5%;
+    }
+  }
+</style>
+
 <script>
   import TeamWidget from 'widgets/TeamWidget'
+
   var GameDef = require('../scripts/game-definition.js');
 
   export default {
@@ -22,6 +41,7 @@
     name: 'battle-widget',
     methods: {
       testBattle: function() {
+
         var casterData = this.findCharacterID("angrypowman");
         var onHitCount = 0; //用于记录是否每个目标都被攻击了
 
@@ -183,22 +203,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  @import "../styles/ui.scss";
-  .battle-view-container {
-    width: 100%;
-    height: 100%;
-    background: #1a1a1a;
-    .team,
-    .enemies {
-      position: relative;
-    }
-    .team {
-      top: 50%;
-    }
-    .enemies {
-      top: 5%;
-    }
-  }
-</style>

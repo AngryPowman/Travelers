@@ -14,7 +14,8 @@
 </style>
 
 <script>
-  var BattleCharacterComponent = require('components/BattleCharacterComponent')
+  import BattleCharacterComponent from 'components/BattleCharacterComponent';
+
   export default {
     components: {
       BattleCharacterComponent

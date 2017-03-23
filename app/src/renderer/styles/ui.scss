@@ -1,3 +1,38 @@
 .ui-battle-container {
-  // background: #000;
+    // background: #000;
+}
+
+.el-ext-game-menu {
+    .el-tabs__nav {
+        width: 100%;
+        display: flex;
+    }
+    .el-tabs__item {
+        width: 100%;
+        transition: all 0.2s ease-in-out;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+    .el-tabs__active-bar {
+        transition: none;
+    }
+}
+
+.el-ext-badge {
+    &.dodgerblue {
+        .el-badge__content {
+            background: dodgerblue;
+        }
+    }
+    &.black {
+        .el-badge__content {
+            background: black;
+        }
+    }
+    &.orange {
+        .el-badge__content {
+            background: #FD6624;
+        }
+    }
 }
